@@ -1,0 +1,7 @@
+<h1> <%= @user.profile.name %> 's Friends:</h1>
+
+<% for friend in @friends %>
+        
+    <p> <%= friend.profile.name %> </p>
+        
+    <% end %>

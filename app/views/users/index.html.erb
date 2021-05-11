@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+
+  <% for user in @users %>
+    <tr>
+      <td><%= user.profile.name %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to "Go to Profile !", user %></td>
+      <td><%= link_to_if(Invitation.reacted?(current_user.id, user.id),  "Add as a Friend!", invitations_path(:user_id => current_user.id, :friend_id => user.id), method: :post) {} %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,31 @@
+<h1>Added You as a Friend:</h1>
+
+<table>
+    <tr>
+        <th>Who?</th>
+    </tr>
+
+    <% for invitation in @invitations %>
+        <tr>
+        <td><%= User.find_by_id(invitation.user_id).profile.name %></td>
+        <td><%= link_to "Accept as a Friend!", invitation_path(invitation), method: :put %></td>
+        <td><%= link_to "Decline", invitation_path(invitation), method: :delete, data: {confirm: "Do you really want to decline this user?"} %></td>
+        </tr>
+    <% end %>
+
+</table>
+
+
+<h1>My Pending Requests:</h1>
+
+
+
+    <% for request in @requests %>
+        
+    <p> <%= User.find_by_id(request.friend_id).profile.name %> </p>
+        
+    <% end %>
+
+
+
+
