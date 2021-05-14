@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :invitations
   has_many :pending_invitations, -> {where confirmed: false}, class_name: 'Invitation', foreign_key: "friend_id"
+  has_many :posts
 
   after_create :init_profile
   devise :database_authenticatable, :registerable,
