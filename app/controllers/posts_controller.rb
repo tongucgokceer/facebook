@@ -5,10 +5,14 @@ class PostsController < ApplicationController
         @users.each do |user|
             user.posts.each do |post|
                 @posts << post
+                @comment=Comment.new
+                @comment.post_id=post.id
             end
           end
         current_user.posts.each do |post|
             @posts << post
+            @comment=Comment.new
+            @comment.post_id=post.id
         end
         #@posts=Post.all
         #puts @posts.class

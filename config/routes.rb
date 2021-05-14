@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resource :profile, only: [:new, :create, :edit, :update, :show]
 
   resources :invitations
-  resources :posts
+  resources :posts 
+  resources :comments
 
   
 

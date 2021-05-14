@@ -46,6 +46,11 @@
         <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
       </p>
     </div>
+    <h3>Comments</h3>
+    <% post.comments.each do |comment| %>
+      <%= render partial: 'comments/content', locals: {comment: comment} %>
+    <% end %>
+    <%= render partial: 'comments/form' , locals: {id: post.id} %>
 </article>
 <% end %>
 
