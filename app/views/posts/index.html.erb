@@ -43,17 +43,34 @@
         <br>
          <%= post.body %>
         <br>
-        <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+        <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+          <% if pre_like %>
+            <%= button_to like_path(post), method: :delete, params: { post_id: post.id} do %>
+              <small><a>Unlike</a> · <%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+            <% end %>
+          <% else %>
+            <%= button_to likes_path, method: :post, params: { post_id: post.id } do %>
+              <small><a>Like</a> · <%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+            <% end %>
+          <% end %>
       </p>
     </div>
     <h3>Comments</h3>
     <% post.comments.each do |comment| %>
       <%= render partial: 'comments/content', locals: {comment: comment} %>
+      <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
+          <% if pre_like %>
+            <%= button_to like_path(comment), method: :delete, params: { comment_id: comment.id} do %>
+              <small><a>Unlike</a> · <%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+            <% end %>
+          <% else %>
+            <%= button_to likes_path, method: :post, params: { comment_id: comment.id } do %>
+              <small><a>Like</a> · <%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+            <% end %>
+          <% end %>
     <% end %>
     <%= render partial: 'comments/form' , locals: {id: post.id} %>
 </article>
 <% end %>
-
-
 
 
