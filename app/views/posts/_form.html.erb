@@ -1,0 +1,25 @@
+<%= form_for @post do |f| %>
+
+    <article class="media">
+    <figure class="media-left">
+        <p class="image is-64x64">
+        <%= image_tag current_user.profile.image_url(:thumb).to_s %>
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="field">
+        <p class="control">
+            <%= f.text_area :body, class: "textarea", placeholder: "Create a new Post..." %>   
+        </p>
+        </div>
+        <nav class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <%= f.submit "Submit", class: "button is-info" %>
+            </div>
+        </div>
+        </nav>
+    </div>
+    </article>
+
+<% end %>

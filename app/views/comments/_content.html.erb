@@ -4,7 +4,7 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <img src="https://bulma.io/images/placeholders/128x128.png">
+     <%= image_tag user.profile.image_url(:thumb).to_s %>
     </p>
   </figure>
   <div class="media-content">
@@ -30,6 +30,10 @@
     </nav>
   </div>
   <div class="media-right">
-    <button class="delete"></button>
+    <% if user.id == current_user.id || Post.find_by_id(comment.post_id).user_id == current_user.id%>
+      <%= button_to comment_path(comment), method: :delete do %>
+        <small><a>X</a></small>
+      <% end %>
+    <% end %>
   </div>
 </article>

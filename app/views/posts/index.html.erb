@@ -1,31 +1,6 @@
 <h1> <%= current_user.profile.name %> 's Timeline:</h1>
 
-
-  <%= form_for @post do |f| %>
-
-    <article class="media">
-    <figure class="media-left">
-        <p class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/128x128.png">
-        </p>
-    </figure>
-    <div class="media-content">
-        <div class="field">
-        <p class="control">
-            <%= f.text_area :body, class: "textarea", placeholder: "Create a new Post..." %>   
-        </p>
-        </div>
-        <nav class="level">
-        <div class="level-left">
-            <div class="level-item">
-                <%= f.submit "Submit", class: "button is-info" %>
-            </div>
-        </div>
-        </nav>
-    </div>
-    </article>
-
-<% end %>
+<%= render partial: 'posts/form' %>
 
 
 
@@ -33,7 +8,7 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <img src="https://bulma.io/images/placeholders/128x128.png">
+      <%= image_tag User.find_by_id(post.user_id).profile.image_url(:thumb).to_s %>
     </p>
   </figure>
   <div class="media-content">
@@ -43,6 +18,12 @@
         <br>
          <%= post.body %>
         <br>
+        <% if post.user_id == current_user.id %>
+          <%= button_to post_path(post), method: :delete do %>
+            <small><a>X</a></small>
+          <% end %>
+        <% end %>
+
         <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
           <% if pre_like %>
             <%= button_to like_path(post), method: :delete, params: { post_id: post.id} do %>

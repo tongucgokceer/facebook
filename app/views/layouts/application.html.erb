@@ -17,13 +17,15 @@
         <div class="navbar-item">
           <div class="buttons">
             <% if current_user %>
-              <%= link_to "My Timeline", posts_path, class: 'button is-link' %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button is-link' %>
-              <%= link_to "Edit Profile", edit_profile_path, class: 'button is-link' %>
-              <%= link_to "Check for Friends", users_path, class: 'button is-link' %>
-              <%= link_to "My Profile", user_path(current_user), class: 'button is-link' %>
-              <%= link_to "Friend Requests", invitations_path, class: 'button is-link' %>
-              <%= link_to "My Friends", user_friends_path(current_user), class: 'button is-link' %>
+              <% if current_user.profile %>
+                <%= link_to "My Timeline", posts_path, class: 'button is-link' %>
+                <%= link_to "Edit Profile", edit_profile_path, class: 'button is-link' %>
+                <%= link_to "Check for Friends", users_path, class: 'button is-link' %>
+                <%= link_to "My Profile", user_path(current_user), class: 'button is-link' %>
+                <%= link_to "Friend Requests", invitations_path, class: 'button is-link' %>
+                <%= link_to "My Friends", user_friends_path(current_user), class: 'button is-link' %>
+              <% end %>
             <% else %>
               <%= link_to "Login", new_user_session_path, class: 'button is-link' %>
             <% end %>

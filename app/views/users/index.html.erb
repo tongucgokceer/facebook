@@ -13,3 +13,28 @@
     </tr>
   <% end %>
 </table>
+
+<section class="section">
+        <div class="container has-text-centered">
+            <h2 class="title">Welcome to the Community!</h2>
+
+            <div class="tile is-ancestor">
+
+            <% for user in @users %>
+            <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <figure class="image">
+                            
+                            <%= image_tag user.profile.image_url(:thumb).to_s %>
+                        </figure>
+                        <p class="title"><%= user.profile.name %> <%= user.profile.surname %> </p>
+                        <p class="subtitle">Joined:<%= user.profile.created_at.strftime("%d-%b-%Y") %> </p>
+                        <p class="button"><%= link_to "Visit #{user.profile.gender == 'Male' ? 'his' : 'her'} profile", user %> </p>
+                        <p><%= link_to_if(Invitation.reacted?(current_user.id, user.id),  "Add as a Friend!", invitations_path(:user_id => current_user.id, :friend_id => user.id), method: :post) {} %></p>
+                    </article>
+                </div>
+                <% end %>
+                </div>
+                </div>
+                </section>
+

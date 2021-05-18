@@ -12,4 +12,10 @@ class CommentsController < ApplicationController
         redirect_to posts_path, :notice => "Comment created !!!" if @comment.save
     end
 
+    def destroy
+        @comment=Comment.find(params[:id])
+        @comment.destroy
+        redirect_to posts_path, :notice => "Comment deleted !!!"
+    end
+
 end

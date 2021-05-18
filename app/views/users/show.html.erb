@@ -1,5 +1,35 @@
-<%= "My Profile" %>
-
-
-
-<h1>Hello <%= @profile.name %> !!!! </h1>
+<!DOCTYPE html>
+<html>
+<% if @profile %>
+<body>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-vcentered">
+                    <div class="column is-4">
+                        <figure class="image is-square">
+                          <%= image_tag @profile.image_url(:thumb).to_s %>
+                        </figure>
+                    </div>
+                    <div class="column is-6 is-offset-1">
+                        <h1 class="title is-2">
+                            Hello <%= @profile.name %> !!!
+                        </h1>
+                        <h2 class="subtitle is-4">
+                            Let this cover page describe a product or service.
+                        </h2>
+                        <br>
+                        <% if @profile == current_user.profile %>
+                        <%= link_to "Create a new post!!!", new_post_path, class:  "button is-medium is-info is-outlined"%>
+                        <% end %>
+                       
+                    </div>
+                </div>
+            </div>
+        </div> 
+</body>
+<% else %>
+    <p class="has-text-centered">
+        <%= link_to "Create your profile !!!", new_profile_path, class:  "button is-medium is-info is-outlined"%>
+    </p>
+<% end %>
+</html>
