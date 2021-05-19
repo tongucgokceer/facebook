@@ -14,18 +14,17 @@
                         <h1 class="title is-2">
                             Hello <%= @profile.name %> !!!
                         </h1>
-                        <h2 class="subtitle is-4">
-                            Let this cover page describe a product or service.
-                        </h2>
+                        
                         <br>
                         <% if @profile == current_user.profile %>
-                        <%= link_to "Create a new post!!!", new_post_path, class:  "button is-medium is-info is-outlined"%>
+                            <%= render partial: 'posts/form' %>
                         <% end %>
                        
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+        <%= render partial: 'posts/post' %> 
 </body>
 <% else %>
     <p class="has-text-centered">

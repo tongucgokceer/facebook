@@ -1,0 +1,50 @@
+
+<% @posts.each do |post| %>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= image_tag User.find_by_id(post.user_id).profile.image_url(:thumb).to_s %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong><%= User.find_by_id(post.user_id).profile.name %></strong>
+            <br>
+             <%= post.body %>
+            <br>
+            <% if post.user_id == current_user.id %>
+              <%= button_to post_path(post), method: :delete do %>
+                <small><a>X</a></small>
+              <% end %>
+            <% end %>
+    
+            <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+              <% if pre_like %>
+                <%= button_to like_path(post), method: :delete, params: { post_id: post.id} do %>
+                  <small><a>Unlike</a> · <%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+                <% end %>
+              <% else %>
+                <%= button_to likes_path, method: :post, params: { post_id: post.id } do %>
+                  <small><a>Like</a> · <%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+                <% end %>
+              <% end %>
+          </p>
+        </div>
+        <h3>Comments</h3>
+        <% post.comments.each do |comment| %>
+          <%= render partial: 'comments/content', locals: {comment: comment} %>
+          <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
+              <% if pre_like %>
+                <%= button_to like_path(comment), method: :delete, params: { comment_id: comment.id} do %>
+                  <small><a>Unlike</a> · <%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+                <% end %>
+              <% else %>
+                <%= button_to likes_path, method: :post, params: { comment_id: comment.id } do %>
+                  <small><a>Like</a> · <%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+                <% end %>
+              <% end %>
+        <% end %>
+        <%= render partial: 'comments/form' , locals: {id: post.id} %>
+    </article>
+    <% end %>

@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
     def show
         @profile=User.find(params[:id]).profile
+        @posts=User.find(params[:id]).posts
+        @comment=Comment.new
+        @post=Post.new
     end
 
     def friends
