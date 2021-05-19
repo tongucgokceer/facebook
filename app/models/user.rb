@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  devise :omniauthable, omniauth_providers: %i[facebook]
 
   after_create :init_profile
   devise :database_authenticatable, :registerable,
@@ -14,7 +15,7 @@ class User < ApplicationRecord
 
   def init_profile
     self.create_profile
-    redirect_to new_profile_path
+    #redirect_to new_profile_path
   end
 
   def friends
@@ -28,10 +29,18 @@ class User < ApplicationRecord
     Invitation.confirmed_record?(id, user.id)
   end
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.email = auth.info.email   # assuming the user model has a name
+      #user.image = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails, 
+      # uncomment the line below to skip the confirmation emails.
+      #user.skip_confirmation!
+    end
+  end
+
+
 
 end
-
-
-
-
-

@@ -92,6 +92,10 @@ Devise.setup do |config|
   # Does not affect registerable.
   # config.paranoid = true
 
+  #Facebook Authentication
+
+  config.omniauth :facebook, "497371905041008", "1ce204010e1794b45956e6d93426e5e3"
+
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
   # Notice that if you are skipping storage for all authentication paths, you
