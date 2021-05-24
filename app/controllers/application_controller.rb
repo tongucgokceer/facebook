@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
     protected
 
     def after_sign_in_path_for(user)
-        new_profile_path if user.profile == nil
+        if user.profile == nil
+            new_profile_path
+        else
+            posts_path 
+        end
     end
 
 

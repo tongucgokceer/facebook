@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     :registrations => "users/registrations",
     omniauth_callbacks: 'users/omniauth_callbacks' }
 
+    devise_scope :user do
+      delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroyy_user_session
+    end
+
 
   
   resources :users, only: [:index, :show] do

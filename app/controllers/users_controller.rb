@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :redirect_to_root
 
     def index
-        @users=User.where.not(id: current_user.id)
+        @users=User.where('id IN (SELECT DISTINCT(user_id) FROM profiles)').where.not(id: current_user.id)
     end
 
     def show

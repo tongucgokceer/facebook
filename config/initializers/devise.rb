@@ -94,7 +94,7 @@ Devise.setup do |config|
 
   #Facebook Authentication
 
-  config.omniauth :facebook, "497371905041008", "1ce204010e1794b45956e6d93426e5e3"
+  config.omniauth :facebook, ENV["app_id"], ENV["api_key"]
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
