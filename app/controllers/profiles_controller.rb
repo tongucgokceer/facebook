@@ -13,6 +13,7 @@ class ProfilesController < ApplicationController
         @profile=Profile.new(profile_params)
         @profile.user_id=current_user.id
         @profile.save
+        UserMailer.with(user: current_user).welcome_email.deliver_later
 
         redirect_to user_path(@profile.user_id)
     end
