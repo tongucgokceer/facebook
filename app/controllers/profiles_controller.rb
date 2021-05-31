@@ -12,6 +12,7 @@ class ProfilesController < ApplicationController
     def create
         @profile=Profile.new(profile_params)
         @profile.user_id=current_user.id
+        @profile.image=File.open('app/assets/images/odinface_deneme.jpg') if profile_params[:image] == nil
         @profile.save
         UserMailer.with(user: current_user).welcome_email.deliver_later
 

@@ -9,7 +9,7 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong><%= User.find_by_id(post.user_id).profile.name %></strong>
+            <strong><%= link_to User.find_by_id(post.user_id).profile.name , User.find_by_id(post.user_id) %></strong>
             <br>
              <%= post.body %>
             <br>
@@ -48,3 +48,5 @@
         <%= render partial: 'comments/form' , locals: {id: post.id} %>
     </article>
     <% end %>
+
+

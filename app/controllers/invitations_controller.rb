@@ -10,19 +10,19 @@ class InvitationsController < ApplicationController
         @invitation.user_id=params[:user_id]
         @invitation.friend_id=params[:friend_id]
         @invitation.save
-        redirect_to users_path, :notice => "Request sent!!!asdasdasdasdasdasdasdasdasda"
+        redirect_to users_path, :notice => "Request sent!!!"
     end
 
     def update
         @invitation=Invitation.find(params[:id])
         @invitation.update_attribute(:confirmed,true)
-        redirect_to invitations_path, :notice => "FRIENDSHIP ACCEPTED!!!"
+        redirect_to invitations_path, :notice => "FRIENDSHIP ACCEPTED :))"
     end
 
     def destroy
         @invitation=Invitation.find(params[:id])
         @invitation.destroy
-        redirect_to invitations_path, :notice => "FRIENDSHIP REJECTED!!!"
+        redirect_to invitations_path, :notice => "FRIENDSHIP REJECTED :(("
     end
    
 end
