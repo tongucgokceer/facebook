@@ -1,7 +1,24 @@
-<h1> <%= @user.profile.name %> 's Friends:</h1>
 
-<% for friend in @friends %>
-        
-    <p> <%= friend.profile.name %> </p>
-        
-    <% end %>
+<h2 class="title">Here is your friends!</h2>
+
+<section class="section">
+        <div class="container has-text-centered">
+            <div class="tile is-ancestor">
+
+            <% for friend in @friends %>
+            <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <figure class="image">
+                            
+                            <%= image_tag friend.profile.image_url(:thumb).to_s %>
+                        </figure>
+                        <p class="title"><%= friend.profile.name %> <%= friend.profile.surname %> </p>
+                        <p class="subtitle">Joined:<%= friend.profile.created_at.strftime("%d-%b-%Y") %> </p>
+                        <p class="button"><%= link_to "Visit #{friend.profile.gender == 'Male' ? 'his' : 'her'} profile", friend %> </p>
+                        <p><%= link_to_if(Invitation.reacted?(current_user.id, friend.id),  "Add as a Friend!", invitations_path(:user_id => current_user.id, :friend_id => friend.id), method: :post) {} %></p>
+                    </article>
+                </div>
+                <% end %>
+                </div>
+                </div>
+                </section>

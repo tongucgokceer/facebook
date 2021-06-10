@@ -21,8 +21,9 @@
 
 
     <% for request in @requests %>
-        
-    <p> <%= User.find_by_id(request.friend_id).profile.name %> </p>
+        <% if User.find_by_id(request.friend_id) %> 
+            <p> <%= User.find_by_id(request.friend_id).profile.name %> </p>
+        <% end %>
         
     <% end %>
 
