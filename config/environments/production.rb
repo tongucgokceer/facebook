@@ -41,6 +41,8 @@ Rails.application.configure do
   :enable_starttls_auto => true
   }
 
+  config.action_mailer.default_url_options = { :host => 'blooming-taiga-43912.herokuapp.com' }
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = 'http://assets.example.com'
 
