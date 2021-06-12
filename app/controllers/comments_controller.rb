@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
         @comment.user_id=current_user.id
         @comment.post_id=params[:comment][:post_id]
         #@comment.save!
-        UserMailer.with(user: current_user).welcome_email.deliver_now
+        #UserMailer.with(user: current_user).welcome_email.deliver_now
 
         redirect_to posts_path, :notice => "Comment created !!!" if @comment.save
     end
