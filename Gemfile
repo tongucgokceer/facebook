@@ -37,6 +37,8 @@ gem 'omniauth-rails_csrf_protection'
 
 gem "figaro"
 
+gem 'fog-aws'
+
 gem "letter_opener", group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
